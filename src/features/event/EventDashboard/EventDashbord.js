@@ -60,14 +60,16 @@ const eventsDashboard = [
 
     state = {
       events: eventsDashboard,
+      selectedEvent: null,
       isOpen: false,
+      isOn: false
     }
-
-  
 
     handleFormOpen = () => {
     this.setState({
-      isOpen: true
+      selectedEvent: null,
+      isOpen: true,
+      isOn: false
     })
   }
     handleCancel = () => {
@@ -76,28 +78,53 @@ const eventsDashboard = [
       })
     }
 
-    handleCreateEvent = (newEvent) => {
-      newEvent.id = cuid();
-      newEvent.hostPhotoURL = 'assets/user.png'
-      const updatedEvents = [...this.state.events, newEvent]
+    closeHandler = () => {
       this.setState({
-        events: updatedEvents,
-        isOpen: false
+        isOn: false
       })
     }
 
+    handleCreateEvent = (newEvent) => {
+      newEvent.id = cuid();
+      newEvent.hostPhotoURL = 'https://randomuser.me/api/portraits/men/23.jpg'
+      const updatedEvents = [...this.state.events, newEvent]
+      this.setState({
+        events: updatedEvents,
+        isOpen: false,
+        isOn: true
+      })
+    }
+
+    handleEditEvent = (eventToUpdate) => () => {
+      this.setState({
+        selectedEvent: eventToUpdate,
+        isOpen: true
+      })
+    }
+
+
   render() {
 
+    const {selectedEvent} = this.state;
     return (
       <div>
         <Grid>
           <Grid.Column width={10}>
-              <EventList events={this.state.events} />
+              <EventList onEventEdit={this.handleEditEvent} events={this.state.events} />
           </Grid.Column>
           <Grid.Column width={6}>
               <Button positive content='Create Event' onClick={this.handleFormOpen}/>
               {this.state.isOpen && 
-              <EventForm createEvent={this.handleCreateEvent} handleCancel={this.handleCancel}/>}
+              <EventForm selectedEvent={selectedEvent} createEvent={this.handleCreateEvent} handleCancel={this.handleCancel}/>}
+                        {this.state.isOn && 
+                            <div class="ui success message">
+                            <i onClick={this.closeHandler} class="close icon" />
+                            <div class="header">
+                              Your event has been created!
+                            </div>
+                            <p>You may now view the event by clicking 'view'</p>
+                          </div>
+          }
           </Grid.Column>
         </Grid>
       </div>

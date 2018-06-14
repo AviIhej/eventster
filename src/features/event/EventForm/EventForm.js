@@ -57,6 +57,7 @@ class EventForm extends Component {
             </Button>
             <Button onClick={handleCancel}  type="button">Cancel</Button>
           </Form>
+          
         </Segment>
       </div>
     );
