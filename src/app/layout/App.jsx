@@ -10,6 +10,7 @@ class App extends Component {
         <NavBar />
         <Container className="main">
           <EventDashboard />
+          <h1>Big Trouble</h1>
         </Container>
       </div>
     );
