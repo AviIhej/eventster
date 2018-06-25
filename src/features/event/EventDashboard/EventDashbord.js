@@ -95,9 +95,30 @@ const eventsDashboard = [
       })
     }
 
-    handleEditEvent = (eventToUpdate) => () => {
+    handleUpdateEvent = (updatedEvent) => {
       this.setState({
-        selectedEvent: eventToUpdate,
+        events: this.state.events.map( (event) => {
+          if(event.id === updatedEvent.id){
+            return Object.assign({}, updatedEvent)
+          }else{
+            return event
+          }
+        }),
+        isOpen: false,
+        selectedEvent: null
+      })
+    }
+
+    handleDeleteEvent = (eventId) => () =>{
+      const updatedEvents = this.state.events.filter(e => e.id !== eventId);
+      this.setState({
+        events: updatedEvents
+      })
+    }
+
+    handleOpenEvent = (eventToOpen) => () => {
+      this.setState({
+        selectedEvent: eventToOpen,
         isOpen: true
       })
     }
@@ -110,12 +131,12 @@ const eventsDashboard = [
       <div>
         <Grid>
           <Grid.Column width={10}>
-              <EventList onEventEdit={this.handleEditEvent} events={this.state.events} />
+              <EventList deleteEvent={this.handleDeleteEvent} onEventOpen={this.handleOpenEvent} events={this.state.events} />
           </Grid.Column>
           <Grid.Column width={6}>
               <Button positive content='Create Event' onClick={this.handleFormOpen}/>
               {this.state.isOpen && 
-              <EventForm selectedEvent={selectedEvent} createEvent={this.handleCreateEvent} handleCancel={this.handleCancel}/>}
+              <EventForm updateEvent={this.handleUpdateEvent} selectedEvent={selectedEvent} createEvent={this.handleCreateEvent} handleCancel={this.handleCancel}/>}
                         {this.state.isOn && 
                             <div class="ui success message">
                             <i onClick={this.closeHandler} class="close icon" />
