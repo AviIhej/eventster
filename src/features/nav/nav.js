@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Menu, Container, Button } from "semantic-ui-react";
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, withRouter } from 'react-router-dom';
 
 import logo from '../../assets/antt.png';
 import SignedOutMenu from "./Menus/SignedOutMenu";
@@ -19,9 +19,10 @@ handleSignIn = () => {
 handleSignOut = () => {
   this.setState({
     authenticated: false
-  })
-}
+  });
+  this.props.history.push('/')
 
+}
   render() {
     const {authenticated } = this.state
     return ( 
@@ -33,7 +34,11 @@ handleSignOut = () => {
               Eventster
             </Menu.Item>
             <Menu.Item as={NavLink} to="/events" name="Events" />
-            <Menu.Item as={NavLink} to="/people" name="People" />
+            
+            {authenticated &&
+            <Menu.Item as={NavLink} to="/people" name="People" />}
+
+            {authenticated &&
             <Menu.Item>
               <Button as={NavLink} to={'/createEvent'}
                 floated="right"
@@ -41,8 +46,8 @@ handleSignOut = () => {
                 inverted
                 content="Create Event"
               />
-            </Menu.Item>
-            <Menu.Item position="right">
+            </Menu.Item>}
+            {/* <Menu.Item position="right">
               <Button basic inverted content="Login" />
               <Button as={Link} to={'/signOut'}
                 basic
@@ -50,8 +55,12 @@ handleSignOut = () => {
                 content="Sign Out"
                 style={{ marginLeft: "0.5em" }}
               />
-            </Menu.Item>
-            {authenticated ? <SignedInMenu signOut={this.handleSignOut} /> : <SignedOutMenu signIn={this.handleSignIn} /> }
+            </Menu.Item> */}
+            {authenticated ? (
+               <SignedInMenu signOut={this.handleSignOut} />  
+            ) : (
+              <SignedOutMenu signIn={this.handleSignIn} />
+              )}
           </Container>
         </Menu>
       </div>
@@ -59,4 +68,4 @@ handleSignOut = () => {
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);

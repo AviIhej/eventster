@@ -1,10 +1,11 @@
 import React from 'react';
-import { Menu, Dropdown, Image } from 'semantic-ui-react'
-const SignedInMenu = (signOut) => {
+import { Menu, Dropdown, Image } from 'semantic-ui-react';
+
+const SignedInMenu = ({signOut}) => {
   return(
     <div>
           <Menu.Item position="right">
-            <Image avatar spaced="right" src='/assets/user.png' />
+            <Image avatar spaced="right" src='../assets/user.png' />
             <Dropdown pointing="top left" text="Username">
               <Dropdown.Menu>
                 <Dropdown.Item text="Create Event" icon="plus" />
