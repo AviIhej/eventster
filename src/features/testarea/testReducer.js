@@ -27,5 +27,6 @@ export const decrementCounter = (state, payload) => {
 
 export default createReducer(initialState, {
     [INCREMENT_COUNTER]: incrementCounter,
-    [DECREMENT_COUNTER]: decrementCounter
+    [DECREMENT_COUNTER]: 
+    
 });
