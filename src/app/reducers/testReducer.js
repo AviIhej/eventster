@@ -1,5 +1,5 @@
 const initialState = {
-    data: 42
+    data: 433564
 }
 
 //Takes a state and action
