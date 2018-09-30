@@ -1,4 +1,5 @@
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from '../reducers/rootReducer';
 
 export const configureStore = (preloadedState) => {
@@ -10,7 +11,7 @@ export const configureStore = (preloadedState) => {
     const storeEnhancers = [middlewareEnhancer]; 
 
     //Allows us to create single argument funcitons from right to left
-    const  composedEnhancer = compose(...storeEnhancers);
+    const  composedEnhancer = composeWithDevTools(...storeEnhancers);
 
     //create store. Takes rootReducer, preloadedState, composedEnhancer
     const store = createStore(
