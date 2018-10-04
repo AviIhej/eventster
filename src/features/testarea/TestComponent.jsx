@@ -26,7 +26,7 @@ class TestComponent extends Component{
                 <h1>Test Area</h1>
                 <h3>The answer is: { data}</h3>
                 <Button onClick={incrementCounter} color='green' content='Increment' />
-                <Button onClick={incrementCounter} color='red' content='Decrement' />
+                <Button onClick={decrementCounter} color='red' content='Decrement' />
             </div>
         )
     }

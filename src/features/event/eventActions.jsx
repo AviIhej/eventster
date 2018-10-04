@@ -11,7 +11,7 @@ export const createEvent = (event) => {
 
 export const updateEvent = (event) => {
     return{
-        type: DELETE_EVENT,
+        type: UPDATE_EVENT,
         payload: {
             event
         }

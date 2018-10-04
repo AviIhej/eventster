@@ -1,4 +1,4 @@
-import createReducer from '../../app/common/util/reducerUtil';
+import { createReducer } from '../../app/common/util/reducerUtil';
 import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT } from './eventConstants';
 
 
@@ -19,7 +19,7 @@ const initialState = [
           id: 'a',
           name: 'Bob',
           photoURL: 'https://randomuser.me/api/portraits/men/20.jpg'
-        },
+        }, 
         {
           id: 'b',
           name: 'Tom',
@@ -60,11 +60,12 @@ const initialState = [
   export const updateEvent = (state, payload) => {
       return [
           ...state.filter(event => event.id !== payload.event.id), 
-        Object.assign({}, payload.event)]
+        Object.assign({}, payload.event)
+      ]
   }
 
   export const deleteEvent = (state, payload) => {
-      return [...state.filter(event => event.id !== payload.eventID)]
+      return [...state.filter(event => event.id !== payload.eventId )]
   }
 
   export default createReducer(initialState, {
