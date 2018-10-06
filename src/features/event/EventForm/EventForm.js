@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import cuid from 'cuid'
+import cuid from 'cuid';
 import { Segment, Form, Button, Grid, Header  } from 'semantic-ui-react';
 import { createEvent, updateEvent } from '../eventActions';
-import TextInput from '../../../app/common/form/TextInput'
+import TextInput from '../../../app/common/form/TextInput';
+import TextArea from '../../../app/common/form/TextArea';
 
 
 const mapState = (state, ownProps) => {
@@ -33,9 +34,6 @@ const actions = {
 }
 
 class EventForm extends Component {
-  state = {
-    event: Object.assign({}, this.props.event)
-  }
 
   onFormSubmit = (event) => {
     event.preventDefault();
@@ -54,17 +52,7 @@ class EventForm extends Component {
     // this.props.createEvent(this.state.event)
   }
 
-  onInputChange = (event) => {
-    const newEvent = this.state.event;
-    newEvent[event.target.name] = event.target.value;
-    this.setState({
-      event: newEvent
-    })
-  }
-
   render() {
-    // const{handleCancel} = this.props;
-    const{event} = this.state;
     return (
       <div>
         <Grid>
@@ -72,13 +60,13 @@ class EventForm extends Component {
           <Segment>
             <Header sub color='teal' content='Event Details'/>
             <Form onSubmit={this.onFormSubmit}>
-              <Field name='title' type='text' component={TextInput } placeholder='Give your event a name' />
-              <Field name='category' type='text' component={TextInput } placeholder='What is your event about' />
-              <Field name='description' type='text' component={TextInput } placeholder='Tell us about your event' />
+              <Field name='title' type='text' component={TextInput} placeholder='Give your event a name' />
+              <Field name='category' type='text' component={TextInput} placeholder='What is your event about' />
+              <Field name='description' type='text' rows={3} component={TextArea} placeholder='Tell us about your event' />
               <Header sub color='teal' content='Event Location Details' />
-              <Field name='city' type='text' component={TextInput } placeholder='Event City' />
-              <Field name='venue' type='text' component={TextInput } placeholder='Event Venue' />
-              <Field name='date' type='text' component={TextInput } placeholder='Event Date' />
+              <Field name='city' type='text' component={TextInput} placeholder='Event City' />
+              <Field name='venue' type='text' component={TextInput} placeholder='Event Venue' />
+              <Field name='date' type='text' component={TextInput} placeholder='Event Date' />
               <Button positive type="submit">
                   Submit
               </Button>
