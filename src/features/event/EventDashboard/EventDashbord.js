@@ -4,11 +4,17 @@ import { Grid, Button }  from 'semantic-ui-react';
 import cuid from 'cuid'
 import EventList from '../EventList/EventList';
 import EventForm from '../EventForm/EventForm';
-
+import { createEvent, deleteEvent, updateEvent } from '../eventActions';
 
 const mapState = (state) => ({
   events: state.events
 })
+
+const actions = {
+  createEvent,
+  deleteEvent,
+  updateEvent
+}
 
    class EventDashboard extends Component {
 
@@ -38,34 +44,24 @@ const mapState = (state) => ({
 
     handleCreateEvent = (newEvent) => {
       newEvent.id = cuid();
-      newEvent.hostPhotoURL = 'https://randomuser.me/api/portraits/men/23.jpg'
-      const updatedEvents = [...this.state.events, newEvent]
-      this.setState({
-        events: updatedEvents,
+      newEvent.hostPhotoURL = 'https://randomuser.me/api/portraits/men/23.jpg';
+      this.props.createEvent(newEvent)
+       this.setState({
         isOpen: false,
-        isOn: true
+        // isOn: true
       })
     }
 
     handleUpdateEvent = (updatedEvent) => {
-      this.setState({
-        events: this.state.events.map( (event) => {
-          if(event.id === updatedEvent.id){
-            return Object.assign({}, updatedEvent)
-          }else{
-            return event
-          }
-        }),
-        isOpen: false,
+      this.props.updateEvent(updatedEvent)
+      this.setState({        
+         isOpen: false,
         selectedEvent: null
       })
     }
 
-    handleDeleteEvent = (eventId) => () =>{
-      const updatedEvents = this.state.events.filter(e => e.id !== eventId);
-      this.setState({
-        events: updatedEvents
-      })
+    handleDeleteEvent = eventId => () =>{
+      this.props.deleteEvent(eventId);
     }
 
     handleOpenEvent = (eventToOpen) => () => {
@@ -109,4 +105,4 @@ const mapState = (state) => ({
   }
 }
 
-export default connect(mapState)(EventDashboard);
+export default connect(mapState, actions)(EventDashboard);
