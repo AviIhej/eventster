@@ -78,19 +78,19 @@ class TestComponent extends Component{
                     <button type="submit">Submit</button>
                 </form>
 
-                      <div style={{ height: '300px', width: '100%' }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyBxhsMsEZYwqUG1V7NITAAk-F1dL4cU3LU' }}
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
-        >
-          <Marker
-            lat={59.955413}
-            lng={30.337844}
-            text={'Kreyser Avrora'}
-          />
-        </GoogleMapReact>
-      </div>
+            <div style={{ height: '300px', width: '100%' }}>
+                <GoogleMapReact
+                bootstrapURLKeys={{ key: 'AIzaSyBxhsMsEZYwqUG1V7NITAAk-F1dL4cU3LU' }}
+                defaultCenter={this.props.center}
+                defaultZoom={this.props.zoom}
+                >
+                <Marker
+                    lat={59.955413}
+                    lng={30.337844}
+                    text={'Kreyser Avrora'}
+                />
+                </GoogleMapReact>
+            </div>
             </div>
         )
     }
