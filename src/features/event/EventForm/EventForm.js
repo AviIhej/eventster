@@ -10,6 +10,7 @@ import TextInput from '../../../app/common/form/TextInput';
 import TextArea from '../../../app/common/form/TextArea';
 import SelectInput from '../../../app/common/form/SelectInput';
 import DateInput from '../../../app/common/form/DateInput'; 
+import PlaceInput from '../../../app/common/form/PlaceInput'; 
 
 
 
@@ -86,8 +87,18 @@ class EventForm extends Component {
               <Field name='category' type='text' options={category} component={SelectInput} placeholder='What is your event about' />
               <Field name='description' type='text' rows={3} component={TextArea} placeholder='Tell us about your event' />
               <Header sub color='teal' content='Event Location Details' />
-              <Field name='city' type='text' component={TextInput} placeholder='Event City' />
-              <Field name='venue' type='text' component={TextInput} placeholder='Event Venue' />
+              <Field 
+              name='city' 
+              type='text' 
+              component={PlaceInput} 
+              options={{types:['(cities)']}} 
+              placeholder='Event City' />
+              <Field 
+              name='venue' 
+              type='text' 
+              component={PlaceInput} 
+              options={{ types: ['establishment'] }}
+              placeholder='Event Venue' />
               <Field 
                name='date'
                type='text' 
