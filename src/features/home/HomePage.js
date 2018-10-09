@@ -1,5 +1,5 @@
 import React from 'react';
-import homelogo from '../../assets/antt.png';
+import homelogo from './antt.png'
 
 
 const HomePage = ({history}) => {
@@ -10,7 +10,7 @@ const HomePage = ({history}) => {
               <h1 className="ui inverted stackable header">
                 <img
                   className="ui image massive"
-                  src={homelogo}
+                  src ={homelogo}
                   alt="logo"
                 />
                 <div className="content">Eventster</div>
